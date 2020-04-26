@@ -5,16 +5,28 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Enter turing machine in binary form: ");
+        List<StateTransition> stateTransitions = new ArrayList<>();
+        boolean isTuringMachineInputValid = false;
 
-        String turingMachineBinaryRepresentation = scanner.nextLine();
+        while (!isTuringMachineInputValid) {
+            try {
+                String turingMachineBinaryRepresentation = scanner.nextLine();
+                stateTransitions = decodeBinaryInputToSingleCommands(turingMachineBinaryRepresentation);
+                isTuringMachineInputValid = true;
+            } catch (Exception e) {
+                System.out.println(e.getMessage() + "\n Please try again: ");
+            }
+        }
 
-        List<StateTransition> stateTransitions = decodeBinäryInputToSingleCommands(turingMachineBinaryRepresentation);
+        UniversalTuringMachine turingMachine = new UniversalTuringMachine(stateTransitions);
 
         System.out.println("Enter your input for the turing machine: ");
-
         String input = scanner.nextLine();
+
+        turingMachine.run(input);
+
+
 
         /*
         * OUTPUT:
@@ -28,7 +40,7 @@ public class Main {
          */
     }
 
-    private static List<StateTransition> decodeBinäryInputToSingleCommands(String turingMachineBinaryRepresentation) {
+    private static List<StateTransition> decodeBinaryInputToSingleCommands(String turingMachineBinaryRepresentation) throws Exception {
         List<StateTransition> stateTransitions = new ArrayList<>();
         String[] transitionsInBinary = turingMachineBinaryRepresentation.split("11");
 

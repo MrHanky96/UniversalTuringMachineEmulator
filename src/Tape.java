@@ -42,6 +42,11 @@ public class Tape {
 
     @Override
     public String toString() {
+
+        for (int i = 0; i < TAPE_OUTPUT_LIMITER; i++) {
+
+        }
+
         return "Left side: ... " +
                 String.join(", ", right.subList(right.size(), right.size() - TAPE_OUTPUT_LIMITER)) +
                 "Current: " + current +

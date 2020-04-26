@@ -5,11 +5,11 @@ public class StateTransition {
     private State finalState;
     private int receivedNumber;
     private int returnNumber;
-    private String memoryMovementDirection;
+    private MemoryMovementDirection memoryMovementDirection;
 
     public StateTransition(State initialState, State finalState,
                            int receivedNumber, int returnNumber,
-                           String memoryMovementDirection) {
+                           MemoryMovementDirection memoryMovementDirection) {
         this.initialState = initialState;
         this.finalState = finalState;
         this.receivedNumber = receivedNumber;
