@@ -1,34 +1,52 @@
-import javafx.beans.property.StringProperty;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class Tape {
-    private char current;
-    private final char EMPTY = '$';
+    private String current;
+    private final String EMPTY = "$";
     private final int TAPE_OUTPUT_LIMITER = 15;
-    private Stack<Character> right = new Stack();
-    private Stack<Character> left = new Stack();
+    private Stack<String> right = new Stack();
+    private Stack<String> left = new Stack();
 
-    public void right() {
-        left
+    public Tape() {
+        right.push(EMPTY);
+        current = right.pop();
     }
 
-    public void left() {
+    public void moveLeft() {
+        right.push(current);
 
+        if (left.isEmpty()) {
+            left.push(EMPTY);
+        }
+
+        current = left.pop();
+    }
+
+    public void moveRight() {
+        left.push(current);
+
+        if (right.isEmpty()) {
+            right.push(EMPTY);
+        }
+
+        current = right.pop();
+    }
+
+    public String getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(String current) {
+        this.current = current;
     }
 
     @Override
     public String toString() {
-        ArrayList<String> rightSideLimited = new ArrayList<>();
-        ArrayList<String> leftSideLimited = new ArrayList<>();
-        for (int i = 0; i < TAPE_OUTPUT_LIMITER; i++) {
-            rightSideLimited.add();
-        }
-
-        return "Left side: " + String.join(", ", rightSideLimited) +
+        return "Left side: ... " +
+                String.join(", ", right.subList(right.size(), right.size() - TAPE_OUTPUT_LIMITER)) +
                 "Current: " + current +
-                "Right side: " + String.join(", ", leftSideLimited);
+                "Right side: " +
+                String.join(", ", left.subList(left.size(), left.size() - TAPE_OUTPUT_LIMITER)) +
+                " ...";
     }
 }
