@@ -32,25 +32,9 @@ public class BinaryTranslator {
     private static int translateNumber(String number) throws Exception {
         switch (number) {
             case "0":
-                return 0;
+                return 0; //1100
             case "00":
                 return 1;
-            case "000":
-                return 2;
-            case "0000":
-                return 3;
-            case "00000":
-                return 4;
-            case "000000":
-                return 5;
-            case "0000000":
-                return 6;
-            case "00000000":
-                return 7;
-            case "000000000":
-                return 8;
-            case "0000000000":
-                return 9;
             default:
                 throw new Exception("Number not found: " + number);
         }

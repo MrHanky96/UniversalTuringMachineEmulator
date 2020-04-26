@@ -26,18 +26,11 @@ public class Main {
 
         turingMachine.run(input);
 
-
-
-        /*
-        * OUTPUT:
-        * a) das korrekte Ergebnis,
-        * b) die Angabe des aktuellen Zustandes der TM,
-        * c) das Band mit 15 Elementen vor und nach dem Lese-/Schreibkopf,
-        * d) die aktuelle Position des Lese-/Schreibkopfes und
-        * e) ein Zähler, der die Anzahl der bisher durchgeführten Berechnungsschritte angibt.
-        * f) FOptional: Graphische Ausgabe des Übergangsdiagramms im Step-Modus, Grafisches
-        * Interface, usw. Bitte nur angehen, wenn Sie wirklich Zeit dazu haben.
-         */
+        System.out.println("A) Result: " + turingMachine.getResult());
+        System.out.println("B) Current state: " + turingMachine.getCurrentState());
+        System.out.println("C) Tape (15 signs each side): " + turingMachine.getMemoryTape().toString());
+        System.out.println("D) Tape current state: " + turingMachine.getMemoryTape().getCurrent());
+        System.out.println("E) Calculation step count: " + turingMachine.getCalculationStepCount());
     }
 
     private static List<StateTransition> decodeBinaryInputToSingleCommands(String turingMachineBinaryRepresentation) throws Exception {
@@ -56,5 +49,6 @@ public class Main {
             ));
         }
 
+        return stateTransitions;
     }
 }
