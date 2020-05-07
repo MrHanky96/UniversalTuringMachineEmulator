@@ -10,29 +10,14 @@ public class BinaryTranslator {
                 translateMemoryMovementDirection(memoryMovementDirection));
     }
 
-    private static State translateState(String state) throws Exception {
-        switch (state) {
-            case "0":
-                return State.Q1;
-            case "00":
-                return State.Q2;
-            case "000":
-                return State.Q3;
-            case "0000":
-                return State.Q4;
-            case "00000":
-                return State.Q5;
-            case "000000":
-                return State.Q6;
-            default:
-                throw new Exception("State not found");
-        }
+    private static int translateState(String state) {
+        return state.length();
     }
 
     private static int translateNumber(String number) throws Exception {
         switch (number) {
             case "0":
-                return 0; //1100
+                return 0;
             case "00":
                 return 1;
             default:

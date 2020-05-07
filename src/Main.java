@@ -19,18 +19,15 @@ public class Main {
             }
         }
 
-        UniversalTuringMachine turingMachine = new UniversalTuringMachine(stateTransitions);
+        System.out.println("Single step mode?: (true/false)");
+        boolean isSingleStepMode = scanner.nextBoolean();
+
+        UniversalTuringMachine turingMachine = new UniversalTuringMachine(stateTransitions, isSingleStepMode);
 
         System.out.println("Enter your input for the turing machine: ");
         String input = scanner.nextLine();
 
         turingMachine.run(input);
-
-        System.out.println("A) Result: " + turingMachine.getResult());
-        System.out.println("B) Current state: " + turingMachine.getCurrentState());
-        System.out.println("C) Tape (15 signs each side): " + turingMachine.getMemoryTape().toString());
-        System.out.println("D) Tape current state: " + turingMachine.getMemoryTape().getCurrent());
-        System.out.println("E) Calculation step count: " + turingMachine.getCalculationStepCount());
     }
 
     private static List<StateTransition> decodeBinaryInputToSingleCommands(String turingMachineBinaryRepresentation) throws Exception {
