@@ -1,5 +1,3 @@
-import javafx.beans.property.StringProperty;
-
 public class StateTransition {
     private int initialState;
     private int finalState;

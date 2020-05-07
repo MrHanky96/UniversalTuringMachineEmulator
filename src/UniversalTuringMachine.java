@@ -2,11 +2,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class UniversalTuringMachine {
-    private Tape memoryTape;                        //c) das Band mit 15 Elementen vor und nach dem Lese-/Schreibkopf,
-                                                    //d) die aktuelle Position des Lese-/Schreibkopfes und
+    private Tape memoryTape;
     private List<StateTransition> stateTransition;
-    private int currentState;                     //b) die Angabe des aktuellen Zustandes der TM
-    private int calculationStepCount;               //e) ein Zähler, der die Anzahl der bisher durchgeführten Berechnungsschritte angibt.
+    private int currentState;
+    private int calculationStepCount;
     private boolean isSingleStepMode;
 
     public UniversalTuringMachine(List<StateTransition> stateTransition, boolean isSingleStepMode) {
@@ -71,11 +70,11 @@ public class UniversalTuringMachine {
             numbers = input.split("[*]");
         }
 
-        return getNumberAsZeros(Integer.parseInt(numbers[0])) + "111" + getNumberAsZeros(Integer.parseInt(numbers[1]));
+        return getNumberAsZeros(Integer.parseInt(numbers[0])) + "1" + getNumberAsZeros(Integer.parseInt(numbers[1]));
     }
 
     private String getNumberAsZeros(int number) {
-        String zeros = "0";
+        String zeros = "";
 
         for (int i = 0; i < number; i++) {
             zeros += "0";

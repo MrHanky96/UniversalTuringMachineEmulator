@@ -8,10 +8,20 @@ public class Main {
         System.out.println("Enter turing machine in binary form: ");
         List<StateTransition> stateTransitions = new ArrayList<>();
         boolean isTuringMachineInputValid = false;
+        boolean isInputProvided = false;
+        String input = "";
 
         while (!isTuringMachineInputValid) {
             try {
                 String turingMachineBinaryRepresentation = scanner.nextLine();
+                isInputProvided = turingMachineBinaryRepresentation.contains("111");
+
+                if (isInputProvided) {
+                    String[] turingMachineAndInput = turingMachineBinaryRepresentation.split("111");
+                    turingMachineBinaryRepresentation = turingMachineAndInput[0];
+                    input = turingMachineAndInput[1];
+                }
+
                 stateTransitions = decodeBinaryInputToSingleCommands(turingMachineBinaryRepresentation);
                 isTuringMachineInputValid = true;
             } catch (Exception e) {
@@ -21,12 +31,14 @@ public class Main {
 
         System.out.println("Single step mode?: (true/false)");
         boolean isSingleStepMode = scanner.nextBoolean();
+        scanner.nextLine();
+
+        if (!isInputProvided) {
+            System.out.println("Enter your input for the turing machine: ");
+            input = scanner.nextLine();
+        }
 
         UniversalTuringMachine turingMachine = new UniversalTuringMachine(stateTransitions, isSingleStepMode);
-
-        System.out.println("Enter your input for the turing machine: ");
-        String input = scanner.nextLine();
-
         turingMachine.run(input);
     }
 
