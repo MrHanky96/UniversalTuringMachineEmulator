@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -47,11 +48,20 @@ public class Tape {
 
     @Override
     public String toString() {
+        //TODO Print always 15 elements of tape left and right
+
         return "Left side: ... " +
                 String.join(", ", right.toString()) +
-                "Current: " + current +
-                "Right side: " +
+                " Current: " + current +
+                " Right side: " +
                 String.join(", ", left.toString()) +
                 " ...";
+
+        /*return "Left side: ... " +
+                String.join(", ", right.subList(right.size(), right.size() - TAPE_OUTPUT_LIMITER)) +
+                "Current: " + current +
+                "Right side: " +
+                String.join(", ", left.subList(left.size(), left.size() - TAPE_OUTPUT_LIMITER)) +
+                " ...";*/
     }
 }

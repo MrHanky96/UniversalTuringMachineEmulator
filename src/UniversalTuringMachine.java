@@ -1,4 +1,3 @@
-import javax.swing.plaf.nimbus.State;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,12 +84,6 @@ public class UniversalTuringMachine {
     }
 
     private String getNumberAsZeros(int number) {
-        String zeros = "";
-
-        for (int i = 0; i < number; i++) {
-            zeros += "0";
-        }
-
-        return zeros;
+        return "0".repeat(Math.max(0, number));
     }
 }
