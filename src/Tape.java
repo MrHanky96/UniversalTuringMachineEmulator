@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class Tape {
     private String current;
@@ -32,6 +33,10 @@ public class Tape {
         current = right.pop();
     }
 
+    public String getBand() {
+        return left.stream().collect(Collectors.joining()) + right.stream().collect(Collectors.joining());
+    }
+
     public String getCurrent() {
         return current;
     }
@@ -43,10 +48,10 @@ public class Tape {
     @Override
     public String toString() {
         return "Left side: ... " +
-                String.join(", ", right.subList(right.size(), right.size() - TAPE_OUTPUT_LIMITER)) +
+                String.join(", ", right.toString()) +
                 "Current: " + current +
                 "Right side: " +
-                String.join(", ", left.subList(left.size(), left.size() - TAPE_OUTPUT_LIMITER)) +
+                String.join(", ", left.toString()) +
                 " ...";
     }
 }

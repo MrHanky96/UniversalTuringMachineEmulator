@@ -1,15 +1,17 @@
+import javax.swing.plaf.nimbus.State;
 import java.util.List;
+import java.util.Optional;
 
 public class UniversalTuringMachine {
     private Tape memoryTape;
-    private List<StateTransition> stateTransition;
+    private List<StateTransition> stateTransitions;
     private int currentState;
     private int calculationStepCount;
     private boolean isSingleStepMode;
 
-    public UniversalTuringMachine(List<StateTransition> stateTransition, boolean isSingleStepMode) {
+    public UniversalTuringMachine(List<StateTransition> stateTransitions, boolean isSingleStepMode) {
         currentState = 1;
-        this.stateTransition = stateTransition;
+        this.stateTransitions = stateTransitions;
         this.memoryTape = new Tape();
         this.isSingleStepMode = isSingleStepMode;
     }
@@ -19,10 +21,11 @@ public class UniversalTuringMachine {
             input = encodeInput(input);
         }
 
+        int i = 0;
         char[] characters = input.toCharArray();
+        StateTransition currentStateTransition = getCurrentStateTransition(characters[i]);
 
-        for (int i = 0; i < characters.length; i++) {
-            StateTransition currentStateTransition = getCurrentStateTransition(characters[i]);
+        while (currentStateTransition != null) {
 
             memoryTape.setCurrent(String.valueOf(characters[i]));
 
@@ -38,6 +41,10 @@ public class UniversalTuringMachine {
             if (isSingleStepMode) {
                 print();
             }
+
+            i++;
+            char nextCharacter = characters.length > i ? characters[i] : '$';
+            currentStateTransition = getCurrentStateTransition(nextCharacter);
         }
 
         if (!isSingleStepMode) {
@@ -46,18 +53,23 @@ public class UniversalTuringMachine {
     }
 
     private void print() {
-        System.out.println("A) Result: " + memoryTape.toString());
+        if (currentState == 2) {
+            System.out.println("A) Result: " + memoryTape.getBand());
+        }
+
         System.out.println("B) Current state: " + currentState);
         System.out.println("C) Tape (15 signs each side): " + memoryTape.toString());
         System.out.println("D) Tape current state: " + memoryTape.getCurrent());
-        System.out.println("E) Calculation step count: " + calculationStepCount);
+        System.out.println("E) Calculation step count: " + calculationStepCount + "\n");
     }
 
     private StateTransition getCurrentStateTransition(char inputCharacter) {
-        return stateTransition.stream().filter(transition ->
+        Optional<StateTransition> stateTransition =  stateTransitions.stream().filter(transition ->
                 transition.getInitialState() == currentState &&
                 transition.getReceivedNumber().equals(String.valueOf(inputCharacter))
-        ).findFirst().get();
+        ).findFirst();
+
+        return stateTransition.isPresent() ? stateTransition.get() : null;
     }
 
     private String encodeInput(String input) {
