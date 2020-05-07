@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Optional;
 
 public class UniversalTuringMachine {
     private Tape memoryTape;
@@ -23,7 +22,7 @@ public class UniversalTuringMachine {
         char[] characters = input.toCharArray();
 
         for (int i = 0; i < characters.length; i++) {
-            StateTransition currentStateTransition = getCurrentStateTransition(characters[i]).get();
+            StateTransition currentStateTransition = getCurrentStateTransition(characters[i]);
 
             memoryTape.setCurrent(String.valueOf(characters[i]));
 
@@ -54,11 +53,11 @@ public class UniversalTuringMachine {
         System.out.println("E) Calculation step count: " + calculationStepCount);
     }
 
-    private Optional<StateTransition> getCurrentStateTransition(char inputCharacter) {
+    private StateTransition getCurrentStateTransition(char inputCharacter) {
         return stateTransition.stream().filter(transition ->
                 transition.getInitialState() == currentState &&
-                transition.getReceivedNumber() == inputCharacter
-        ).findFirst();
+                transition.getReceivedNumber().equals(String.valueOf(inputCharacter))
+        ).findFirst().get();
     }
 
     private String encodeInput(String input) {

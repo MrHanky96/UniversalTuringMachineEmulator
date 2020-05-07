@@ -1,12 +1,12 @@
 public class StateTransition {
     private int initialState;
     private int finalState;
-    private int receivedNumber;
-    private int returnNumber;
+    private String receivedNumber;
+    private String returnNumber;
     private MemoryMovementDirection memoryMovementDirection;
 
     public StateTransition(int initialState, int finalState,
-                           int receivedNumber, int returnNumber,
+                           String receivedNumber, String returnNumber,
                            MemoryMovementDirection memoryMovementDirection) {
         this.initialState = initialState;
         this.finalState = finalState;
@@ -32,7 +32,7 @@ public class StateTransition {
         return finalState;
     }
 
-    public int getReceivedNumber() {
+    public String getReceivedNumber() {
         return receivedNumber;
     }
 

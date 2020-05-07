@@ -14,15 +14,8 @@ public class BinaryTranslator {
         return state.length();
     }
 
-    private static int translateNumber(String number) throws Exception {
-        switch (number) {
-            case "0":
-                return 0;
-            case "00":
-                return 1;
-            default:
-                throw new Exception("Number not found: " + number);
-        }
+    private static String translateNumber(String number) {
+        return String.valueOf(number.length() - 1);
     }
 
     private static MemoryMovementDirection translateMemoryMovementDirection(String memoryMovementDirection) throws Exception {
