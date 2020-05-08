@@ -15,7 +15,16 @@ public class BinaryTranslator {
     }
 
     private static String translateNumber(String number) {
-        return String.valueOf(number.length() - 1);
+        switch (number) {
+            case "0":
+                return "0";
+            case "00":
+                return "1";
+            case "000":
+                return Tape.EMPTY;
+            default:
+                return "A";
+        }
     }
 
     private static MemoryMovementDirection translateMemoryMovementDirection(String memoryMovementDirection) throws Exception {

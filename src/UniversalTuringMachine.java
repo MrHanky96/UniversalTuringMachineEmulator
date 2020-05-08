@@ -25,8 +25,16 @@ public class UniversalTuringMachine {
         StateTransition currentStateTransition = getCurrentStateTransition(characters[i]);
 
         while (currentStateTransition != null) {
+            if (characters.length > i) {
+                memoryTape.setCurrent(String.valueOf(characters[i]));
+                i++;
+            }
 
-            memoryTape.setCurrent(String.valueOf(characters[i]));
+            char nextCharacter = memoryTape.getCurrent().toCharArray()[0];
+            currentStateTransition = getCurrentStateTransition(nextCharacter);
+
+            currentState = currentStateTransition.getFinalState();
+            memoryTape.setCurrent(currentStateTransition.getReturnNumber());
 
             if (currentStateTransition.getMemoryMovementDirection() == MemoryMovementDirection.LEFT) {
                 memoryTape.moveLeft();
@@ -34,16 +42,11 @@ public class UniversalTuringMachine {
                 memoryTape.moveRight();
             }
 
-            currentState = currentStateTransition.getFinalState();
             calculationStepCount++;
 
             if (isSingleStepMode) {
                 print();
             }
-
-            i++;
-            char nextCharacter = characters.length > i ? characters[i] : '$';
-            currentStateTransition = getCurrentStateTransition(nextCharacter);
         }
 
         if (!isSingleStepMode) {

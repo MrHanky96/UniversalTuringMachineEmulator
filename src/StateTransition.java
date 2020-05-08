@@ -36,6 +36,10 @@ public class StateTransition {
         return receivedNumber;
     }
 
+    public String getReturnNumber() {
+        return returnNumber;
+    }
+
     public MemoryMovementDirection getMemoryMovementDirection() {
         return memoryMovementDirection;
     }

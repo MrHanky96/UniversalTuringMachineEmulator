@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Tape {
     private String current;
-    private final String EMPTY = "$";
+    public static final String EMPTY = "$";
     private final int TAPE_OUTPUT_LIMITER = 15;
     private Stack<String> right = new Stack();
     private Stack<String> left = new Stack();
