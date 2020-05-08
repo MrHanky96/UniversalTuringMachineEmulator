@@ -33,19 +33,21 @@ public class UniversalTuringMachine {
             char nextCharacter = memoryTape.getCurrent().toCharArray()[0];
             currentStateTransition = getCurrentStateTransition(nextCharacter);
 
-            currentState = currentStateTransition.getFinalState();
-            memoryTape.setCurrent(currentStateTransition.getReturnNumber());
+            if (currentStateTransition != null) {
+                currentState = currentStateTransition.getFinalState();
+                memoryTape.setCurrent(currentStateTransition.getReturnNumber());
 
-            if (currentStateTransition.getMemoryMovementDirection() == MemoryMovementDirection.LEFT) {
-                memoryTape.moveLeft();
-            } else {
-                memoryTape.moveRight();
-            }
+                if (currentStateTransition.getMemoryMovementDirection() == MemoryMovementDirection.LEFT) {
+                    memoryTape.moveLeft();
+                } else {
+                    memoryTape.moveRight();
+                }
 
-            calculationStepCount++;
+                calculationStepCount++;
 
-            if (isSingleStepMode) {
-                print();
+                if (isSingleStepMode) {
+                    print();
+                }
             }
         }
 
@@ -56,13 +58,26 @@ public class UniversalTuringMachine {
 
     private void print() {
         if (currentState == 2) {
-            System.out.println("A) Result: " + memoryTape.getBand());
+            System.out.println("A) Result: " + getResultOfBand());
         }
 
         System.out.println("B) Current state: " + currentState);
-        System.out.println("C) Tape (15 signs each side): " + memoryTape.toString());
+        System.out.println("C) Tape (15 signs each side): \t" + memoryTape.toString());
         System.out.println("D) Tape current state: " + memoryTape.getCurrent());
         System.out.println("E) Calculation step count: " + calculationStepCount + "\n");
+    }
+
+    private int getResultOfBand() {
+        char[] tapeBand = memoryTape.getBand().toCharArray();
+        int zeroCounter = 0;
+
+        for (int i = 0; i < tapeBand.length; i++) {
+            if (tapeBand[i] == '0') {
+                zeroCounter++;
+            }
+        }
+
+        return zeroCounter;
     }
 
     private StateTransition getCurrentStateTransition(char inputCharacter) {
