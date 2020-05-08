@@ -50,7 +50,24 @@ public class Tape {
 
     @Override
     public String toString() {
+        ArrayList<String> rightLimited = new ArrayList<>();
+        rightLimited.addAll(right);
 
-        return String.join(", ", left) + ", [" + current + "], " +  String.join(", ", right);
+        while (rightLimited.size() <= TAPE_OUTPUT_LIMITER) {
+            rightLimited.add(EMPTY);
+        }
+
+        ArrayList<String> leftLimited = new ArrayList<>();
+        leftLimited.addAll(left);
+
+        while (leftLimited.size() <= TAPE_OUTPUT_LIMITER) {
+            leftLimited.add(0, EMPTY);
+        }
+
+        return String.join(", ",
+                leftLimited.subList(
+                    leftLimited.size() - TAPE_OUTPUT_LIMITER, leftLimited.size()
+            )
+        ) + ", [" + current + "], " +  String.join(", ", rightLimited.subList(0, TAPE_OUTPUT_LIMITER));
     }
 }
