@@ -22,8 +22,14 @@ public class BinaryTranslator {
                 return "1";
             case "000":
                 return Tape.EMPTY;
-            default:
+            case "0000":
                 return "A";
+            case "00000":
+                return "B";
+            case "000000":
+                return "C";
+            default:
+                return "";
         }
     }
 
